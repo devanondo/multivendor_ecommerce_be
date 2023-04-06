@@ -14,42 +14,42 @@ const app = express()
 
 // Configuration
 const options = [
-    cors({
-        origin: '*',
-    }),
-    logger('tiny'),
-    helmet(),
-    express.json({ limit: '30mb' }),
-    cookieParser(),
+  cors({
+    origin: '*'
+  }),
+  logger('tiny'),
+  helmet(),
+  express.json({ limit: '30mb' }),
+  cookieParser()
 ]
 app.use(options)
 
 // Basic Route
 app.get('/', (req, res) =>
-    res.json({
-        status: 'success',
-        message: 'Server is running wow!',
-    })
+  res.json({
+    status: 'success',
+    message: 'Server is running wow!'
+  })
 )
 
-//Routes
+// Routes
 app.use('/api/v1', router)
 
 // Connect Server
 connectDatabase()
-    .then(() => {
-        console.log('DB Connected!')
-        app.listen(PORT, () =>
-            console.log(`Server Started on the Port: ${PORT}`)
-        )
-    })
-    .catch((error) => console.log(error.message))
+  .then(() => {
+    console.log('DB Connected!')
+    app.listen(PORT, () =>
+      console.log(`Server Started on the Port: ${PORT}`)
+    )
+  })
+  .catch((error) => console.log(error.message))
 
 // Catch Unhandled routes
 app.all('*', (req, res, next) => {
-    next(
-        new ErrorHandler(`Cannot find ${req.originalUrl} on this server!`, 404)
-    )
+  next(
+    new ErrorHandler(`Cannot find ${req.originalUrl} on this server!`, 404)
+  )
 })
 
 // Globally handled Error
