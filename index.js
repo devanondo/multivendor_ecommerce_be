@@ -4,7 +4,12 @@ import cookieParser from 'cookie-parser';
 import helmet from 'helmet';
 import logger from 'morgan';
 import { connectDatabase } from './server.js';
-import { PORT } from './utils/siteEnv.js';
+import {
+    PORT,
+    REDIS_CLIENT_HOST,
+    REDIS_CLIENT_PASSWOORD,
+    REDIS_CLIENT_PORT,
+} from './utils/siteEnv.js';
 import { GlobalErrorHandler } from './middleware/globalError.js';
 import ErrorHandler from './utils/errorHandler.js';
 import router from './routes/index.js';
@@ -26,9 +31,16 @@ const options = [
 ];
 app.use(options);
 
+//  const client = redis.createClient(
+//     'redis://default:CXet6g8FGq9gj9uxBI30LsNav21kVgDK@redis-18011.c12.us-east-1-4.ec2.cloud.redislabs.com:18011'
+// );
+
 export const client = redis.createClient({
-    host: 'redis-server',
-    port: 6379,
+    password: REDIS_CLIENT_PASSWOORD,
+    socket: {
+        host: REDIS_CLIENT_HOST,
+        port: REDIS_CLIENT_PORT,
+    },
 });
 
 client.connect();
