@@ -1,8 +1,12 @@
-import { Router } from 'express'
-import { exampleRoute } from './exampleRoute.js'
+import { Router } from 'express';
+import { exampleRoute } from './exampleRoute.js';
+import { productRouter } from './productRoute.js';
 
-const router = Router()
+const router = Router();
 
-router.use('/demo', exampleRoute)
+router.use('/demo', exampleRoute);
 
-export default router
+// Products routes
+router.use('/products', productRouter);
+
+export default router;

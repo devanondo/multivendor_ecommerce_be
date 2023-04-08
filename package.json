@@ -24,7 +24,8 @@
         "helmet": "^6.0.1",
         "mongoose": "^7.0.3",
         "morgan": "^1.10.0",
-        "nodemon": "^2.0.22"
+        "nodemon": "^2.0.22",
+        "redis": "^4.6.5"
     },
     "devDependencies": {
         "eslint": "^8.0.1",
