@@ -26,7 +26,10 @@ const options = [
 ];
 app.use(options);
 
-export const client = redis.createClient(6379);
+export const client = redis.createClient({
+    host: 'redis-server',
+    port: 6379,
+});
 
 client.connect();
 client.on('error', (err) => {
